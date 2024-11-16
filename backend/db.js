@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
+require("dotenv").config();
 
-const mongoUrl ='mongodb+srv://vrajprajapati07132004:TxCJj0FUtiMnxlxR@authrouting.pkugp.mongodb.net/?retryWrites=true&w=majority&appName=AuthRouting';
-//TxCJj0FUtiMnxlxR;
 
+const url = process.env.MONGODB_URL;
 
 const connectToMongose = () =>{
-    mongoose.connect(mongoUrl);
+    mongoose.connect(url);
     console.log('mongo database connected successfully')
 }
 
