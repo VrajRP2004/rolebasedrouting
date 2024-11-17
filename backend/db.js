@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-require("dotenv").config();
 
 
-const url = process.env.MONGODB_URL;
+const url = 'mongodb+srv://vrajprajapati07132004:TxCJj0FUtiMnxlxR@authrouting.pkugp.mongodb.net/?retryWrites=true&w=majority&appName=AuthRouting';
 
 const connectToMongose = () =>{
     mongoose.connect(url);
