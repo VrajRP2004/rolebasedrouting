@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login/>}></Route>
-        <Route path='VrajRP2004/AuthRouting' element={<Login/>}></Route>
+        <Route path='/AuthRouting' element={<Login/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
         
