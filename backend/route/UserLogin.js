@@ -25,7 +25,8 @@ router.post('/createuser',[//here check validator
         user = await User.create({
             name:req.body.name,
             email:req.body.email,
-            password:req.body.password
+            password:req.body.password,
+            role:req.body.role
         })
         const data = {
             user:{
@@ -47,7 +48,9 @@ router.post('/createuser',[//here check validator
 // login
 router.post('/login',[//here check validator
     body('email','Eenter valid email').isEmail(),
-    body('password','password most be at least 5 characters').isLength({min:5})
+    body('password','password most be at least 5 characters').isLength({min:5},
+        body('role','role is required')
+    )
 ],async(req,res)=>{
     let success = false;
 
@@ -67,6 +70,11 @@ router.post('/login',[//here check validator
             success = false;
             res.status(400).json({success,error:"incorrect password"});
         }
+        if(role!=user.role){
+            success = false;
+            res.status(400).json({success,error:"incorrect data"});
+        }
+
         const data = {
             user:{
                 id:user.id

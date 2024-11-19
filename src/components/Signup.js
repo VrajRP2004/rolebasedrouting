@@ -3,7 +3,7 @@ import { useNavigate} from 'react-router-dom'
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [credentials,setCredentials] = useState({name:"",email:"",password:""})
+  const [credentials,setCredentials] = useState({name:"",email:"",password:"",role:""})
   function onChange(e){
     setCredentials({...credentials,[e.target.name]:e.target.value})
   }
@@ -14,12 +14,14 @@ const Signup = () => {
       headers:{
         'Content-type':'application/json'
       },
-      body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
+      body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,role:credentials.role})
     });
     const data = await response.json();
     // console.log(data)
-    if(data.success){
-      navigate('/home');      
+    if(data.success && credentials.role==="customer"){
+      navigate('/home')
+    }else if(data.success && credentials.role==="employee"){
+      navigate('/home1')
     }else{
       alert('you did mistake in giving right data')
     }
@@ -33,6 +35,19 @@ const Signup = () => {
       <h2>SignUp</h2>
       <form style={styles.form}>
         <div style={styles.inputContainer}>
+        <div style={styles.inputContainer}>
+          <label htmlFor="role">Select Role</label>
+          <select
+            name="role"
+            id="role"
+            value={credentials.role}
+            onChange={onchange}
+            style={styles.input}
+          >
+            <option value="customer">Customer</option>
+            <option value="employee">Employee</option>
+          </select>
+          </div>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name='name' value={credentials.name} onChange={onChange} style={styles.input} />
         </div>
